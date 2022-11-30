@@ -13,16 +13,14 @@ class Jugador:
 	@staticmethod
 	def iniciar_jugadores(jugadores_totales):
 		# num_jugadores = int(input("¿Cuántos jugadores humanos serán? [0, " + str(jugadores_totales) + "] "))
-		key = -1
-		if jugadores_totales > 0:
-			num_jugadores = Utilities.pregunta(("¿Cuántos jugadores humanos serán? [0, " + str(jugadores_totales) + "] "), 0, jugadores_totales, key)
-			for i in range(num_jugadores):
-			    nombre = input("Nombre del Jugador " + str(1 + i) + ": ")
-			    jugadores.append(Jugador(nombre, False))
+		num_jugadores = Utilities.pregunta(("¿Cuántos jugadores humanos serán? [0, " + str(jugadores_totales) + "] "), 0, jugadores_totales, -1)
+		for i in range(num_jugadores):
+		    nombre = input("Nombre del Jugador " + str(1 + i) + ": ")
+		    jugadores.append(Jugador(nombre, False))
 
-			for i in range(jugadores_totales - num_jugadores):
-			    bot = 'Bot_' + str(i)
-			    jugadores.append(Jugador(bot, True))
+		for i in range(jugadores_totales - num_jugadores):
+		    bot = 'Bot_' + str(i)
+		    jugadores.append(Jugador(bot, True))
 
 		'''print('\n')
 

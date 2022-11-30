@@ -14,7 +14,7 @@ class Uno:
 		self.mesa.mezclar()
 		self.len_mesa = len(self.mesa.mazo)
 
-		print('\nCarta en Mesa:', self.mesa.servir_mesa( (random.randint(0, self.len_mesa))))
+		print('\nCarta en Mesa:', self.mesa.servir_mesa((self.mesa.mazo[ (random.randint(0, self.len_mesa ))])))
 
 		print(self.len_mesa)
 
@@ -24,17 +24,26 @@ class Uno:
 
 	def ronda(self):
 
-		print('\nCarta en Mesa:', self.mesa.cartas_mesa[0].etiqueta)
+		#print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
 
 		for jugador in jugadores:
+			print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
 			self.jugar(jugador)
 
-		print('\nPrimera carta:', self.mesa.mostrar())
+		#print('\nPrimera carta:', self.mesa.mostrar())
 		# print(self.mesa.mostrar_todo())
 
 	def jugar(self, jugador):
-		print('Mano de', jugador.nombre)
+		print('\nMano de', jugador.nombre)
 		jugador.imprimir_mano(selection = True)
+		action = Utilities.opciones("¿Qué harás? Ver, Tirar, Robar. [V, T, R] ", ['V', 'T', 'R'])
+
+		if action == 'T':
+			selection = (Utilities.pregunta('¿Cuál carta tirará? ', 0, len(jugador.mano), -1)) - 1
+			self.mesa.servir_mesa(jugador.mano.pop(selection - 1))
+
+		elif action == 'R':
+			jugador.tomar_carta(self.mesa.mazo[ (random.randint(0, self.len_mesa ))])
 
 	def game_over(self):
 		opt = Utilities.opciones('¿Terminar? ', ['Y', 'N'])

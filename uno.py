@@ -3,6 +3,7 @@ import random
 from jugador import Jugador, jugadores
 from mesa import *
 from utilities import *
+from especiales import *
 
 class Uno:
 	"""docstring for Uno"""
@@ -11,16 +12,19 @@ class Uno:
 		Jugador.iniciar_jugadores(total_jugadores)
 
 		self.mesa = Mesa()
+		self.especiales = Especiales()
+
 		self.mesa.mezclar()
 		self.len_mesa = len(self.mesa.mazo)
 
-		print('\nCarta en Mesa:', self.mesa.servir_mesa((self.mesa.mazo[ (random.randint(0, self.len_mesa ))])))
+		print('\nCarta en Mesa:', self.mesa.servir_mesa((self.mesa.mazo[0])))
 
 		print(self.len_mesa)
 
 		for i in range(5):
 			for jugador in jugadores:
-				jugador.tomar_carta(self.mesa.mazo[ (random.randint(0, self.len_mesa ))])
+				self.mesa.mezclar()
+				jugador.tomar_carta(self.mesa.mazo[0])
 
 	def ronda(self):
 
@@ -28,24 +32,32 @@ class Uno:
 
 		for jugador in jugadores:
 			print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
+			#print('Logitud de la mano del jugador:', len(jugador.mano))
 			self.jugar(jugador)
 
 		#print('\nPrimera carta:', self.mesa.mostrar())
 		# print(self.mesa.mostrar_todo())
 
 	def jugar(self, jugador):
+		
 		print('\nMano de', jugador.nombre)
 		jugador.imprimir_mano(selection = True)
 		action = Utilities.opciones("¿Qué harás? Ver, Tirar, Robar. [V, T, R] ", ['V', 'T', 'R'])
 
 		if action == 'T':
-			selection = (Utilities.pregunta('¿Cuál carta tirará? ', 0, len(jugador.mano), -1)) - 1
-			self.mesa.servir_mesa(jugador.mano.pop(selection - 1))
+			selection = (Utilities.pregunta('¿Cuál carta tirará? ', 1, len(jugador.mano), -1)) - 1
+
+			for especial in self.especiales.skills_especiales:
+				if especial == jugador.mano[selection].valor:
+					self.especiales.skills_especiales[especial](jugador, self.mesa)
+
+			self.mesa.servir_mesa(jugador.mano.pop(selection))
 
 		elif action == 'R':
-			jugador.tomar_carta(self.mesa.mazo[ (random.randint(0, self.len_mesa ))])
+			self.mesa.mezclar()
+			jugador.tomar_carta(self.mesa.mazo[0])
 
 	def game_over(self):
-		opt = Utilities.opciones('¿Terminar? ', ['Y', 'N'])
+		opt = Utilities.opciones("¿Terminar? ['Y', 'N'] ", ['Y', 'N'])
 		end = True if opt == 'Y' else False
 		return end

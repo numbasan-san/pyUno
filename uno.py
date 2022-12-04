@@ -42,6 +42,7 @@ class Uno:
 		
 		print('\nMano de', jugador.nombre)
 		jugador.imprimir_mano(selection = True)
+		print(len(jugadores))
 		action = Utilities.opciones("¿Qué harás? Ver, Tirar, Robar. [V, T, R] ", ['V', 'T', 'R'])
 
 		if action == 'T':

@@ -15,8 +15,8 @@ class Especiales:
 
 		for jugador in jugadores:
 			for i in range(4):
-				mesa.mezclar()
 				if not jugador == player:
+					mesa.mezclar()
 					jugador.tomar_carta(mesa.mazo[0])
 				else:
 					pass
@@ -27,7 +27,7 @@ class Especiales:
 	def skill_plus_2(jugador, mesa):
 
 		index = jugadores.index(jugador)
-		if index == len(jugadores):
+		if index == len(jugadores) - 1:
 			index =  0
 		else:
 			index = index + 1
@@ -52,7 +52,7 @@ class Especiales:
 	def skill_ginyu(jugador):
 
 		index = jugadores.index(jugador)
-		if index == len(jugadores):
+		if index == len(jugadores) - 1:
 			index =  0
 		else:
 			index = index + 1

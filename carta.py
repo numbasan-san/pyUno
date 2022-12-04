@@ -14,12 +14,12 @@ class Carta:
 		''' 	
 		'''
 		palos = ['rojo', 'azul', 'amarillo', 'verde']
-		valores = ['+4', 'Ginyu', 'Joker', '2', '3', '4', '5', '6', '7', '8', '9']
+		valores = ['2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverso', '+2']
 		for p in palos:
 			for v in valores:
 				baraja.append(Carta(v, p)) # v + " " + p, 
 			
-		especiales = ['Skip', 'Reverso', '+2']
+		especiales = ['+4', 'Ginyu', 'Joker']
 		for e in especiales:
 			baraja.append(Carta(e, 'negro')) # e + " " + 'negro',
 

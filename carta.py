@@ -11,14 +11,14 @@ class Carta:
 	@staticmethod
 	def cargar_cartas():
 		baraja = []
-		''' 
+		''' 	
+		'''
 		palos = ['rojo', 'azul', 'amarillo', 'verde']
 		valores = ['+4', 'Ginyu', 'Joker', '2', '3', '4', '5', '6', '7', '8', '9']
 		for p in palos:
 			for v in valores:
 				baraja.append(Carta(v, p)) # v + " " + p, 
-				
-		'''
+			
 		especiales = ['Skip', 'Reverso', '+2']
 		for e in especiales:
 			baraja.append(Carta(e, 'negro')) # e + " " + 'negro',

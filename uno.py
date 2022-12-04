@@ -30,7 +30,7 @@ class Uno:
 
 		#print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
 
-		for jugador in jugadores:
+		for jugador in (jugadores):
 			print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
 			#print('Logitud de la mano del jugador:', len(jugador.mano))
 			self.jugar(jugador)
@@ -47,12 +47,22 @@ class Uno:
 		if action == 'T':
 			selection = (Utilities.pregunta('¿Cuál carta tirará? ', 1, len(jugador.mano), -1)) - 1
 
-			for especial in self.especiales.skills_especiales:
-				if especial == jugador.mano[selection].valor:
-					self.especiales.skills_especiales[especial](jugador, self.mesa)
+			if jugador.mano[selection].valor == '+4':
+				self.especiales.skill_plus_4(jugador, self.mesa)
+				self.mesa.servir_mesa(jugador.mano.pop(selection))
 
-			self.mesa.servir_mesa(jugador.mano.pop(selection))
+			elif jugador.mano[selection].valor == 'Joker':
+				jugador.mano[selection].palo = self.especiales.skill_joker()
+				jugador.mano[selection].etiqueta = jugador.mano[selection].valor + ' ' + jugador.mano[selection].palo
+				self.mesa.servir_mesa(jugador.mano.pop(selection))
 
+			elif jugador.mano[selection].valor == 'Ginyu':
+				self.mesa.servir_mesa(jugador.mano.pop(selection))
+				self.especiales.skill_ginyu(jugador)
+
+			elif jugador.mano[selection].valor == '+2':
+				self.especiales.skill_plus_2(jugador, self.mesa)
+				self.mesa.servir_mesa(jugador.mano.pop(selection))
 		elif action == 'R':
 			self.mesa.mezclar()
 			jugador.tomar_carta(self.mesa.mazo[0])
@@ -61,3 +71,19 @@ class Uno:
 		opt = Utilities.opciones("¿Terminar? ['Y', 'N'] ", ['Y', 'N'])
 		end = True if opt == 'Y' else False
 		return end
+
+'''
+			PROTOTIPO DEL EFECTO DE LA CARTA 'REVERSO'
+
+			elif jugador.mano[selection].valor == 'Reverso':
+				self.especiales.skill_reverso()
+				self.mesa.servir_mesa(jugador.mano.pop(selection))
+'''
+''' 
+
+			for especial in self.especiales.skills_especiales:
+				if especial == jugador.mano[selection].valor:
+					self.especiales.skills_especiales[especial]()
+			
+
+'''

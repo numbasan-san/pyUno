@@ -3,24 +3,25 @@ import random
 
 class Carta:
 	
-	def __init__(self, etiqueta, valor, palo):
-		self.etiqueta = etiqueta
+	def __init__(self, valor, palo):
 		self.valor = valor
 		self.palo = palo
+		self.etiqueta = str(valor + ' ' + palo)
 
 	@staticmethod
 	def cargar_cartas():
 		baraja = []
 		''' 
-		'''
 		palos = ['rojo', 'azul', 'amarillo', 'verde']
-		valores = ['2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverso', '+2']
+		valores = ['+4', 'Ginyu', 'Joker', '2', '3', '4', '5', '6', '7', '8', '9']
 		for p in palos:
 			for v in valores:
-				baraja.append(Carta(v + " " + p, v, p))
-		especiales = ['+4', 'Ginyu', 'Joker']
+				baraja.append(Carta(v, p)) # v + " " + p, 
+				
+		'''
+		especiales = ['Skip', 'Reverso', '+2']
 		for e in especiales:
-			baraja.append(Carta(e + " " + 'negro', e, 'negro'))
+			baraja.append(Carta(e, 'negro')) # e + " " + 'negro',
 
 		return baraja
 

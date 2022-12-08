@@ -1,5 +1,5 @@
 
-players = ['Bot_0', 'Bot_1', 'Bot_2', 'Bot_3', 'Bot_4', 'Bot_5', 'Bot_6']
+players = ['Bot_0', 'Bot_1', 'Bot_2', 'Bot_3', 'Bot_4']
 game = True
 
 print(players)
@@ -10,7 +10,7 @@ def find_index_player(player):
   next_index =  (index - len(players)) + (len(players) - 1)
   print(f'El jugador en turno, {player}, está en el puesto {index + 1} de la lista, su "opuesto" es {next_index}')
   
-  # print(f'¿Índice prietativo? { next_index }. ({players[ next_index ]})')
+  print(f'¿Índice negativo? { index - len(players) }. ({players[ next_index ]})')
 
   if index == (len(players) - 1):
     # print('final alcanzado')
@@ -22,10 +22,36 @@ def find_index_player(player):
     # 
       
   elif index > 0 and index < len(players):
-
+    
+    '''
+    Para invertir el listado cuando se de un elemento del medio.
+    
+    Yo me rindo. Por ahora
+    '''
+    
+    
+    '''
     count = 0
-
-    for i in range((next_index), (len(players))):
+    for i in range((index + 1), (len(players))):
+      index_list.append( (next_index) + count)
+      count -= 1
+      
+    index_list = index_list[::-1] 
+    index_list.append(index)
+   
+    
+    for i in range(0, ((index)) ):
+      index_list.append( next_index + count)
+      count -= 1
+    index_list = index_list[::-1] 
+    
+    # 
+    # index_list = index_list[::-1]
+    
+        
+    
+    
+    for i in range((index + 1), (len(players))):
       index_list.append( (next_index) + count)
       count -= 1
 
@@ -35,15 +61,13 @@ def find_index_player(player):
 
     for i in range(0, ((index)) ):
 
-      index_list.append( (next_index) + count)
+      index_list.append( next_index + count)
       count -= 1
       # index_list.append( (i - len(players)) )
     
     index_list = index_list[::-1]
 
-    index_list.pop(0)
-
-    '''
+    index_list.pop(-0)
 
     # 
 
@@ -87,7 +111,7 @@ def find_index_player(player):
 
 def play(player_in_turn):
   players_list, index_list = find_index_player(player_in_turn)
-  print(f'Listado: {players_list}\nIndex:{index_list}')
+  print(f'Listado: {players_list}\nIndex:{index_list}\n')
   print()
 
 def pregunta(text, opts):
@@ -105,3 +129,4 @@ while game:
   print(players)
   opt = pregunta('¿Seguir con la ronda? y/n ', ['y', 'n'])
   game = False if opt == 'n' else True
+  

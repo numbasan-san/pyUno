@@ -26,6 +26,12 @@ class Uno:
 				self.mesa.mezclar()
 				jugador.tomar_carta(self.mesa.mazo[0])
 
+				
+	'''
+	BUG.
+	
+	Al momento de hacer el reverso se salta jugadores de vez en vez.
+	'''
 	def ronda(self):
 
 		#print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
@@ -33,7 +39,10 @@ class Uno:
 		for jugador in (jugadores):
 			print('\nCarta en Mesa:', self.mesa.cartas_mesa.etiqueta)
 			#print('Logitud de la mano del jugador:', len(jugador.mano))
-			self.jugar(jugador)
+			null = 0 if self.sentido == 1 else 1
+			index = i + ( null * ( self.sentido * ( len(jugadores) ) ) ) 
+			print(f'Supuesto inverso: {index}')
+			self.jugar(jugadores[ index ]) # self.sentido
 
 		#print('\nPrimera carta:', self.mesa.mostrar())
 		# print(self.mesa.mostrar_todo())
@@ -52,6 +61,11 @@ class Uno:
 				self.especiales.skill_plus_4(jugador, self.mesa)
 				self.mesa.servir_mesa(jugador.mano.pop(selection))
 
+			'''
+			BUG.
+			
+			Cambia el color/palo de las demás cartas Joker del juego al cambiar el palo del joker lanzado.
+			'''
 			elif jugador.mano[selection].valor == 'Joker':
 				jugador.mano[selection].palo = self.especiales.skill_joker()
 				jugador.mano[selection].etiqueta = jugador.mano[selection].valor + ' ' + jugador.mano[selection].palo

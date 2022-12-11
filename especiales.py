@@ -5,26 +5,11 @@ from utilities import *
 class Especiales:
 	
 
-	def __init__(self): #, etiqueta, palo
-		# self.etiqueta = ['+4', 'Ginyu', 'Joker']
-		# self.palo = 'negro'
-		self.skills_especiales = {'+4': self.skill_plus_4, 'Ginyu': self.skill_ginyu, 'Joker': self.skill_joker}
-
+	def __init__(self):
+		self.skills_especiales = {'+4': self.skill_plus, '+2': self.skill_plus, 'Ginyu': self.skill_ginyu, 'Joker': self.skill_joker}
+		
 	@staticmethod
-	def skill_plus_4(player, mesa):
-
-		for jugador in jugadores:
-			for i in range(4):
-				if not jugador == player:
-					mesa.mezclar()
-					jugador.tomar_carta(mesa.mazo[0])
-				else:
-					pass
-
-		print('Los demás jugadores recibieron 4 cartas.')
-
-	@staticmethod
-	def skill_plus_2(jugador, mesa):
+	def skill_plus(jugador, mesa, num):
 
 		index = jugadores.index(jugador)
 		if index == len(jugadores) - 1:
@@ -32,11 +17,11 @@ class Especiales:
 		else:
 			index = index + 1
 
-		for i in range(2):
+		for i in range(num):
 			mesa.mezclar()
 			jugadores[index].tomar_carta(mesa.mazo[0])
 		
-		print('El siguiente jugador recibió 2 cartas.')
+		print(f'El siguiente jugador recibió {str(num)} cartas.')
 
 	@staticmethod
 	def skill_joker():
@@ -62,14 +47,3 @@ class Especiales:
 		jugador.mano = mano_2
 		jugadores[index].mano = mano_1
 		print('VEYETTA #########!!!!!')
-
-'''
-	PROTOTIPO DEL EFECTO DE LA CARTA 'REVERSO'
-			
-	@staticmethod
-	def skill_reverso():
-		player = jugadores[::-1]
-		for i in range(len(player)):
-			jugadores[i] = player[i]
-			print(jugadores[i].nombre)
-'''

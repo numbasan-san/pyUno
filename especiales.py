@@ -3,25 +3,26 @@ from jugador import *
 from utilities import *
 
 class Especiales:
-	
-
-	def __init__(self):
-		self.skills_especiales = {'+4': self.skill_plus, '+2': self.skill_plus, 'Ginyu': self.skill_ginyu, 'Joker': self.skill_joker}
-		
-	@staticmethod
-	def skill_plus(jugador, mesa, num):
-
+    
+	def get_index(jugador):
 		index = jugadores.index(jugador)
 		if index == len(jugadores) - 1:
 			index =  0
 		else:
 			index = index + 1
+			
+		return index
+		
+	@staticmethod
+	def skill_plus(jugador, mesa, plus):
 
-		for i in range(num):
+		index = self.get_index(jugador)
+
+		for i in range(plus):
 			mesa.mezclar()
 			jugadores[index].tomar_carta(mesa.mazo[0])
 		
-		print(f'El siguiente jugador recibió {str(num)} cartas.')
+		print(f'El siguiente jugador recibió {str(plus)} cartas.')
 
 	@staticmethod
 	def skill_joker():
@@ -36,14 +37,11 @@ class Especiales:
 	@staticmethod
 	def skill_ginyu(jugador):
 
-		index = jugadores.index(jugador)
-		if index == len(jugadores) - 1:
-			index =  0
-		else:
-			index = index + 1
+		index = self.get_index(jugador)
 
 		mano_1 = jugador.mano
 		mano_2 = jugadores[index].mano
 		jugador.mano = mano_2
 		jugadores[index].mano = mano_1
 		print('VEYETTA #########!!!!!')
+		

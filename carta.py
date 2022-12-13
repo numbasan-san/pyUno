@@ -11,10 +11,10 @@ class Carta:
 	@staticmethod
 	def cargar_cartas():
 		baraja = []
-		''' 	
 		'''
+		''' 
 		palos = ['rojo', 'azul', 'amarillo', 'verde']
-		valores = ['2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverso', '+2']
+		valores = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Skip', '+2', 'Reverso']
 		for p in palos:
 			for v in valores:
 				baraja.append(Carta(v, p)) # v + " " + p, 
@@ -32,3 +32,4 @@ class Carta:
 
 	def imprimir_carta(self, numeracion = None):
 		print((str(numeracion) + '. ' if numeracion != None else '') + self.etiqueta)
+#

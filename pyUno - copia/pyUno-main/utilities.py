@@ -16,8 +16,14 @@ class Utilities:
         return valor
 
     @staticmethod
-    def validar(respuesta, opciones):        
-        valor = respuesta
-        while (not(valor in opciones)):
-            valor = input(f'Por favor, seleccione una de las opciones dadas {str(opciones)} ').upper()
-        return valor
+    def validar(valor, opciones):
+        respuesta = str(valor)
+        # print(f'Utilities.validar.respuesta = {respuesta}')
+        if respuesta in opciones:
+            print(f'Carta válida.')
+            pass
+        else:
+            while (not(respuesta in opciones)):
+                respuesta = input(f'Por favor, seleccione una de las opciones dadas {str(opciones)}. ').upper()
+        return respuesta
+#

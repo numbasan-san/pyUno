@@ -8,7 +8,7 @@ class Especiales:
 		self.none = None
 
 	@staticmethod
-	def skill_plus(jugador, mesa, plus, sentido):
+	def skill_plus(jugador, mesa, plus):
 
 		index = jugadores.index(jugador)
 		if index == len(jugadores) - 1:

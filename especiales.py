@@ -8,13 +8,15 @@ class Especiales:
 		self.none = None
 
 	@staticmethod
-	def skill_plus(jugador, mesa, plus):
+	def skill_plus(jugador, mesa, plus, sentido):
 
 		index = jugadores.index(jugador)
 		if index == len(jugadores) - 1:
 			index =  0
+		elif index == -(len(jugadores)):
+		    index = -1
 		else:
-			index = index + 1
+			index = index + sentido
 
 		for i in range(plus):
 			mesa.mezclar()
@@ -33,13 +35,15 @@ class Especiales:
 				return palos[palo]
 
 	@staticmethod
-	def skill_ginyu(jugador):
+	def skill_ginyu(jugador, sentido):
 
 		index = jugadores.index(jugador)
 		if index == len(jugadores) - 1:
 			index =  0
+		elif index == -(len(jugadores)):
+		    index = -1
 		else:
-			index = index + 1
+			index = index + sentido
 
 		mano_1 = jugador.mano
 		mano_2 = jugadores[index].mano

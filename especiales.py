@@ -1,6 +1,7 @@
 
 from jugador import *
 from utilities import *
+from carta import *
 
 class Especiales:
 
@@ -32,7 +33,7 @@ class Especiales:
 
 		for palo in palos:
 			if palo == opt:
-				return palos[palo]
+				return Carta('Joker', palos[palo])
 
 	@staticmethod
 	def skill_ginyu(jugador, sentido):

@@ -87,11 +87,9 @@ class Uno:
                 # print(f'Carta lanzada: {jugador.mano[selection].etiqueta}. Indice: {str(selection)}')
 
                 if jugador.mano[selection].valor == 'Joker':
-                    # BUG.
-                    # Cambia el color/palo de las demás cartas Joker del juego al cambiar el palo del joker lanzado.
-                    jugador.mano[selection].palo = self.especiales.skill_joker()
-                    jugador.mano[selection].etiqueta = jugador.mano[selection].valor + ' ' + jugador.mano[selection].palo
-                    self.mesa.servir_mesa(jugador.mano.pop(selection))
+                    carta = self.especiales.skill_joker()
+                    jugador.mano.pop(selection)
+                    self.mesa.servir_mesa(carta)
 
                 elif jugador.mano[selection].valor == 'Ginyu':
                     self.mesa.servir_mesa(jugador.mano.pop(selection))
@@ -107,12 +105,12 @@ class Uno:
                     # Al momento de hacer el reverso se salta jugadores de vez en vez.
                     self.sentido *= -1
                     self.mesa.servir_mesa(jugador.mano.pop(selection))
-                    # print(f'Kira Kuin Dai San no Bakkudan: Baito Za Dasuto!')
+                    print(f'Kira Kuin Dai San no Bakkudan: Baito Za Dasuto!')
 
                 elif jugador.mano[selection].valor == 'Skip':
                     self.skip = True
                     self.mesa.servir_mesa(jugador.mano.pop(selection))
-                    # print(f'Kimu Kurinson!')
+                    print(f'Kimu Kurinson!')
 
                 elif not jugador.mano[selection].valor in ['+2', 'Reverso', 'Skip', 'Joker', '+4', 'Ginyu']:
                     self.mesa.servir_mesa(jugador.mano.pop(selection))
